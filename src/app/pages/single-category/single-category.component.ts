@@ -1,10 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PostsService } from 'src/app/services/posts.service';
 
 @Component({
   selector: 'app-single-category',
   templateUrl: './single-category.component.html',
   styleUrls: ['./single-category.component.css']
 })
-export class SingleCategoryComponent {
+export class SingleCategoryComponent implements OnInit {
 
+
+
+  constructor( private route: ActivatedRoute, private postService: PostsService ){}
+
+  postArray: Array<Object>
+  categoryPbj: any;
+
+  ngOnInit(): void {
+
+    this.route.params.subscribe(val =>{
+
+      this.categoryPbj = val;
+
+      this.postService.loadCategoryPosts(val['id']).subscribe(post => {
+
+        this.postArray = post
+
+        console.log(this.postArray)
+      })
+
+
+    })
+
+  }
 }
