@@ -3,32 +3,28 @@
     <div class="col-md-9">
       <div class="card shadow-effect">
 
-        <img src="https://images.pexels.com/photos/1556691/pexels-photo-1556691.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
+        <img src="{{ postData.postImgPath }}"/>
         <div class="card-body">
-            <small class="bg-light text-danger text-center">Design</small>
-            <small class="bg-light text-success text-center ml-2">Featured</small>
-            <small class="bg-light text-info text-center ml-2">Views - 100,256</small>
-            <small class="bg-light text-warning text-center ml-2">LAST UPDATED - SEP 20, 2021</small>
+            <small class="bg-light text-danger text-center">{{ postData.category.category }}</small>
+            <small class="bg-light text-success text-center ml-3" *ngIf="postData.data.isFeatured">  Featured </small>
+            <small class="bg-light text-info text-center ml-2">Views - {{ postData.views }}</small>
+            <small class="bg-light text-warning text-center ml-2">LAST UPDATED - {{ postData.createdAt.toMillis() | date }}</small>
 
-            <h1 class="mt-3 mb-3">HOW TO START A BLOG IN 2021 EDITED NEW CATEGORY</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id consequat sapien. Sed cursus aliquet arcu, malesuada semper odio ullamcorper id. Sed condimentum libero eros, eget elementum turpis fermentum non. Pellentesque gravida pharetra gravida. Aliquam molestie magna ut libero commodo, quis imperdiet lacus lacinia. In hac habitasse platea dictumst. Nulla quis sollicitudin risus. Suspendisse posuere interdum justo, fringilla viverra nunc molestie in. Pellentesque erat risus, auctor vel fermentum in, ultricies in ipsum. Fusce eu porta lacus. Duis scelerisque ex a tincidunt tincidunt. Ut imperdiet placerat ante. Mauris vitae viverra nisl, non dapibus libero. Maecenas lacinia elementum vestibulum. Fusce id faucibus metus.
-
-Duis sed metus odio. Nulla ultrices sit amet magna id condimentum. Nulla volutpat ornare leo, nec vestibulum ligula eleifend vitae. Fusce et facilisis leo. Sed viverra, sapien vitae eleifend viverra, urna felis rhoncus arcu, non consectetur ante tortor vehicula dolor. Integer congue turpis urna, eu vestibulum risus facilisis vehicula. Etiam sit amet eleifend sapien, ac consectetur libero. Etiam aliquam scelerisque maximus. Nunc lobortis, nunc eu scelerisque malesuada, ipsum velit condimentum lacus, quis vestibulum augue nulla at justo. Curabitur laoreet felis eget sem pretium cursus. Suspendisse at imperdiet dui. Vestibulum tempor felis a risus facilisis imperdiet. Nunc sed enim gravida, semper tellus sit amet, rhoncus purus. Vivamus euismod diam et ante aliquet, ac scelerisque magna porta.
-
-Morbi molestie a sem vitae blandit. Praesent tellus odio, aliquam et nulla quis, pretium gravida turpis. Integer euismod tempus est, sodales malesuada nibh varius nec. Donec et arcu lectus. Cras pulvinar efficitur velit vitae interdum. Duis vel dolor id sem fermentum tempus. Mauris quis posuere erat, sed bibendum enim. Ut volutpat dui sit amet enim dictum, eu rhoncus lorem blandit. Ut id laoreet justo. Nullam nec turpis eget elit eleifend vestibulum eu a velit. Mauris vel justo a metus lacinia interdum vitae in tortor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer metus nulla, maximus eu imperdiet faucibus, convallis et augue. Maecenas iaculis risus elit, aliquet congue ante ultrices id. Aliquam ut leo massa. Maecenas dolor est, tincidunt at efficitur ut, lacinia in nulla.
-        </p>
+            <h1 class="mt-3 mb-3">{{ postData.title }}</h1>
+            <p [innerHtml] = "postData.content"> </p>
         </div>
       </div>
 
       <app-comments-form></app-comments-form>
       <app-comment-list></app-comment-list>
     </div>
-    <div class="col-md-3">
-      <app-post-card></app-post-card>
-      <app-post-card></app-post-card>
-      <app-post-card></app-post-card>
-      <app-post-card></app-post-card>
+    <div class="col-md-3" >
+
+      <div *ngFor="let similar of similarPost">
+        <app-post-card [postData] = 'similar'></app-post-card>
+      </div>
+
+
     </div>
   </div>
 </div>
