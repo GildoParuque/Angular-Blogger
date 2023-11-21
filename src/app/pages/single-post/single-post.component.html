@@ -3,10 +3,10 @@
     <div class="col-md-9">
       <div class="card shadow-effect">
 
-        <img src="{{ postData.postImgPath }}"/>
+        <img class="img img-fluid" src="{{ postData.postImgPath }}"/>
         <div class="card-body">
             <small class="bg-light text-danger text-center">{{ postData.category.category }}</small>
-            <small class="bg-light text-success text-center ml-3" *ngIf="postData.data.isFeatured">  Featured </small>
+            <small class="bg-light text-success text-center ml-3" *ngIf="postData.isFeatured">  Featured </small>
             <small class="bg-light text-info text-center ml-2">Views - {{ postData.views }}</small>
             <small class="bg-light text-warning text-center ml-2">LAST UPDATED - {{ postData.createdAt.toMillis() | date }}</small>
 
